@@ -98,7 +98,10 @@ document.addEventListener('keydown', function(event) {
     } else if (key === '.' || key === ',') {
         event.preventDefault();
         appendNumber('.');
-    } else if (key === 'Enter' || key === '=') {
+    }else if (key === '%' || key === 'p') {
+        event.preventDefault();
+        appendOperator('%');
+    }else if (key === 'Enter' || key === '=') {
         event.preventDefault();
         calculate();
     }   else if (key === 'Backspace'|| key === 'Delete') {
