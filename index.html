@@ -14,25 +14,26 @@
             <input type="text" id="display" class="display" readonly>
             <div class="buttons">
                 <button class="btn clear-btn" onclick="clearDisplay()">C</button>
-                <button class="btn operator-btn" onclick="appendOperator('/')">&divide;</button>
-                <button class="btn operator-btn" onclick="appendOperator('*')">&times;</button>
+                <button class="btn operator-btn" aria-label="divied" onclick="appendOperator('/')">&divide;</button>
+                <button class="btn operator-btn" aria-label="multiply" onclick="appendOperator('*')">&times;</button>
                 <button class="btn delete-btn" onclick="deleteLast()">DEL</button>
                 
 
                 <button class="btn" onclick="appendNumber('7')">7</button>
                 <button class="btn" onclick="appendNumber('8')">8</button>
                 <button class="btn" onclick="appendNumber('9')">9</button>
-                <button class="btn operator-btn" onclick="appendOperator('-')">-</button>
+                <button class="btn operator-btn" aria-label="subtract" onclick="appendOperator('-')">-</button>
 
                 <button class="btn" onclick="appendNumber('4')">4</button>
                 <button class="btn" onclick="appendNumber('5')">5</button>
                 <button class="btn" onclick="appendNumber('6')">6</button>
-                <button class="btn operator-btn" onclick="appendOperator('+')">+</button>
+                <button class="btn operator-btn" aria-label="add" onclick="appendOperator('+')">+</button>
 
                 <button class="btn" onclick="appendNumber('1')">1</button>
                 <button class="btn" onclick="appendNumber('2')">2</button>
                 <button class="btn" onclick="appendNumber('3')">3</button>
                 <button class="btn" onclick="appendNumber('.')">.</button>
+                 <button class="btn" aria-label="percentage" onclick="appendOperator('%')">%</button>
               
 
                 <button class="btn zero-btn" onclick="appendNumber('0')">0</button>
