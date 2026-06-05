@@ -46,46 +46,38 @@ function clearDisplay() {
     expression = '';
     updateDisplay();
 }
-// Delete last character
-function deleteLast(){
-    let cursorposition = display.selectionStart;
-
-    if (cursorposition > 0) {
-        // take later value from input
-        expression = display.value;
-        expression =
-         expression.slice(0, cursorposition - 1)
-          + expression.slice(cursorposition);
-        updateDisplay();
-
-        display.value = expression;
-        // put corsor back
-        display.focus();
-        display.selectionRange(cursorposition - 1, cursorposition - 1);
-    }
-}
-function deleteMiddle() {
-    let cursorposition = display.selectionStart;
-
-    if (cursorposition > 0 && cursorposition <= expression.length) {
-        expression = expression.slice(0, cursorposition - 1) + expression.slice(cursorposition);
-        updateDisplay();
-
-        // put cursor back at correct position
-        setTimeout(() => {
-            display.selectionStart = cursorposition - 1;
-            display.selectionEnd = cursorposition - 1;
-        }, 0);
-    }
-
-}
-
 // Update display value
 function updateDisplay() {
     display.value = expression;
 } 
+function smartDelete() {
+    expression = display.value;
 
+    // Case 1: Input is focused → delete at cursor
+    if (document.activeElement === display && display.selectionStart !== null) {
+        let cursorposition = display.selectionStart;
 
+        if (cursorposition > 0) {
+            expression =
+                expression.slice(0, cursorposition - 1) +
+                expression.slice(cursorposition);
+            updateDisplay();
+
+            // restore cursor
+            setTimeout(() => {
+                display.selectionStart = cursorposition - 1;
+                display.selectionEnd = cursorposition - 1;
+            }, 0);
+        }
+    } 
+    // Case 2: Input not focused → delete last character
+    else {
+        if (expression.length > 0) {
+            expression = expression.slice(0, -1);
+            updateDisplay();
+        }
+    }
+}
 // Add keyboard support
 document.addEventListener('keydown', function(event) {
     const key = event.key;
@@ -106,7 +98,7 @@ document.addEventListener('keydown', function(event) {
         calculate();
     }   else if (key === 'Backspace'|| key === 'Delete') {
         event.preventDefault();
-        deleteLast();
+        smartdelete();
     } else if (key === 'Escape' || key === 'c' || key === 'C') {
         event.preventDefault();
         clearDisplay();
